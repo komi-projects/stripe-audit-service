@@ -1,0 +1,18 @@
+Subject: {{company}} — 30-second Stripe audit
+
+Hi {{name}},
+
+Quick question: Do you know your payment recovery rate?
+
+I ask because most SaaS founders I talk to don't — and they're typically leaving 5-15% of MRR on the table.
+
+Not from churn. From expired cards, insufficient funds, and banks rejecting charges.
+
+I built a tool that analyzes Stripe accounts and identifies exactly how much revenue is recoverable + specific fixes.
+
+$197 one-time. 30-second setup. 24-hour delivery.
+
+Worth a look? I can send the secure audit link.
+
+Best,
+Komi

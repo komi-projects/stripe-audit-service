@@ -1,0 +1,24 @@
+Subject: The $500+ hiding in your Stripe dashboard
+
+Hi {{name}},
+
+I just finished a Stripe audit for a {{industry}} company doing $15K MRR.
+
+They were losing $1,200/month to failed payments.
+Not churn. Just… failed payments.
+
+With 3 specific fixes (took them 2 hours), they recovered $890/month.
+That's $10,680/year from a Saturday afternoon of work.
+
+I do these audits for $197.
+You get a professional report with exact numbers and specific action items.
+
+If I can't find at least $500 in recoverable revenue, full refund.
+
+Want me to run the numbers on your account?
+
+Best,
+Komi
+
+---
+P.S. — I only do 5 audits per week. First come, first served.

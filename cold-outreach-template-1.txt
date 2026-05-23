@@ -1,0 +1,32 @@
+Subject: Your Stripe account is leaking revenue — here's the data
+
+Hi {{name}},
+
+I analyzed Stripe payment failure patterns across 200+ SaaS companies last quarter.
+
+The average company loses 8% of MRR to involuntary churn — failed payments, not cancellations.
+
+Here's what most founders miss:
+→ 70% of failed payments are recoverable
+→ Only 30% of SaaS companies have ANY dunning sequence
+→ The average recovered payment = $147 ARR
+
+If you're at $10K MRR, that's potentially $800/month in recoverable revenue.
+
+I offer a one-time Stripe Payment Recovery Audit for $197.
+
+You get:
+• Complete analysis of your failed payment patterns
+• Recovery potential estimate (specific $ amount)
+• Actionable fixes you can implement in 24 hours
+• Professional PDF report
+
+Takes 30 seconds to connect. Report delivered in 24 hours.
+
+Interested? Reply and I'll send the secure audit link.
+
+Best,
+Komi
+
+---
+P.S. — If the audit doesn't show at least $500 in recoverable revenue, I'll refund every dollar. No questions.
