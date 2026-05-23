@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Payment Recovery Audit Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #f8fafc;
+            padding: 40px 20px;
+        }
+        .report {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 48px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+        }
+        .header .subtitle {
+            color: #64748b;
+            font-size: 1rem;
+        }
+        .header .date {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        .score-card {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .score-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+        .score-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .score-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        .section {
+            margin-bottom: 32px;
+        }
+        .section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .metric {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 4px;
+        }
+        .metric-label {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+        .finding {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 0 8px 8px 0;
+        }
+        .finding.severe {
+            background: #fee2e2;
+            border-left-color: #ef4444;
+        }
+        .finding.good {
+            background: #dcfce7;
+            border-left-color: #22c55e;
+        }
+        .finding-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .finding-desc {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        .recommendation {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 0 8px 8px 0;
+        }
+        .recommendation-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1e40af;
+        }
+        .recommendation-desc {
+            font-size: 0.9rem;
+            color: #1e40af;
+        }
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 32px;
+        }
+        .cta h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        .cta p {
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+        .cta-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        footer {
+            text-align: center;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+        @media (max-width: 600px) {
+            .metric-grid { grid-template-columns: 1fr; }
+            .report { padding: 24px; }
+            .score-value { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="report">
+        <div class="header">
+            <h1>Stripe Payment Recovery Audit</h1>
+            <div class="subtitle">Professional analysis of failed payment patterns and recovery potential</div>
+            <div class="date">Generated: {{date}} | Prepared by Komi Systems</div>
+        </div>
+
+        <div class="score-card">
+            <div class="score-label">Payment Health Score</div>
+            <div class="score-value">{{score}}/100</div>
+            <div class="score-desc">{{score_description}}</div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Key Metrics</h2>
+            <div class="metric-grid">
+                <div class="metric">
+                    <div class="metric-value">{{mrr}}</div>
+                    <div class="metric-label">Current MRR</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">{{at_risk}}</div>
+                    <div class="metric-label">MRR At Risk</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">{{recovery_potential}}</div>
+                    <div class="metric-label">Recovery Potential</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">{{failed_count}}</div>
+                    <div class="metric-label">Failed Payments (30d)</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">{{recovery_rate}}%</div>
+                    <div class="metric-label">Current Recovery Rate</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">{{target_rate}}%</div>
+                    <div class="metric-label">Target Recovery Rate</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ Key Findings</h2>
+            <div class="finding severe">
+                <div class="finding-title">No Dunning Sequence Detected</div>
+                <div class="finding-desc">Your Stripe account has no automated dunning flow. Failed payments are not followed up systematically.</div>
+            </div>
+            <div class="finding">
+                <div class="finding-title">High Failure Rate</div>
+                <div class="finding-desc">{{failed_rate}}% of payments failed in the last 30 days, above the 15% SaaS average.</div>
+            </div>
+            <div class="finding good">
+                <div class="finding-title">High Recovery Potential</div>
+                <div class="finding-desc">{{recovery_potential}} of failed payments appear recoverable with proper dunning sequences.</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 Recommendations</h2>
+            <div class="recommendation">
+                <div class="recommendation-title">1. Implement Smart Dunning Sequence</div>
+                <div class="recommendation-desc">Day 1: Friendly reminder | Day 3: Account restriction notice | Day 7: Card update link | Day 14: Personal outreach</div>
+            </div>
+            <div class="recommendation">
+                <div class="recommendation-title">2. Optimize Retry Timing</div>
+                <div class="recommendation-desc">Use exponential backoff: 1 hour, 1 day, 3 days, 7 days instead of immediate retries.</div>
+            </div>
+            <div class="recommendation">
+                <div class="recommendation-title">3. Enable Smart Retries in Stripe</div>
+                <div class="recommendation-desc">Turn on Stripe's Smart Retries for subscriptions. This alone can improve recovery by 10-15%.</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💰 Revenue Impact</h2>
+            <div class="metric-grid">
+                <div class="metric">
+                    <div class="metric-value">{{annual_loss}}</div>
+                    <div class="metric-label">Annual Revenue Loss</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">{{recoverable_annual}}</div>
+                    <div class="metric-label">Recoverable Annual Revenue</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">{{roi}}</div>
+                    <div class="metric-label">ROI of Fix</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta">
+            <h3>Want Help Implementing These Fixes?</h3>
+            <p>SimpleRecover can automate your entire payment recovery pipeline. Set up in 5 minutes, see results in 24 hours.</p>
+            <a href="https://komi-projects.github.io/simple-recover-landing/" class="cta-btn">Try SimpleRecover Free →</a>
+        </div>
+
+        <footer>
+            <p>Report prepared by Komi Systems | Questions? komi54666@gmail.com</p>
+            <p>This audit is based on Stripe data analysis and industry benchmarks. Results are estimates.</p>
+        </footer>
+    </div>
+</body>
+</html>
